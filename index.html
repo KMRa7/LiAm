@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アンケートフォーム</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #374151;
+            --primary-light: #6b7280;
+            --secondary: #4f46e5;
+            --accent: #059669;
+            --dark: #1f2937;
+            --light: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --blue-50: #eff6ff;
+            --blue-100: #dbeafe;
+            --blue-500: #3b82f6;
+            --green-50: #f0fdf4;
+            --green-500: #22c55e;
+            --purple-50: #f3f4f6;
+            --purple-500: #8b5cf6;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--gray-50);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        .container {
+            background: var(--light);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 600px;
+            padding: 3rem;
+            position: relative;
+            border: 1px solid var(--gray-200);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 16px 16px 0 0;
+        }
+
+        h1 {
+            color: var(--gray-800);
+            font-size: 2.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: -0.025em;
+        }
+
+        /* セクションヘッダーの新しいスタイル */
+        .section-header {
+            display: block;
+            margin: 3rem 0 1.5rem;
+            padding: 1.25rem 2rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-align: center;
+            color: var(--light);
+            background: linear-gradient(135deg, var(--secondary), var(--purple-500));
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .label {
+            display: block;
+            margin: 2rem 0 1rem;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            background-color: var(--gray-50);
+            border-radius: 12px;
+            font-size: 1rem;
+            text-align: center;
+            color: var(--gray-800);
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .required {
+            background-color: var(--secondary);
+            color: white;
+            font-weight: 500;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            margin-right: 0.75rem;
+            display: inline-block;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: var(--light);
+            transition: all 0.2s ease-in-out;
+            resize: vertical;
+            min-height: 48px;
+            color: var(--gray-700);
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus {
+            border-color: var(--secondary);
+            background-color: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .one-buttons, .two-buttons, .three-buttons, .four-buttons, .five-buttons,
+        .six-buttons, .seven-buttons, .eight-buttons, .nine-buttons, .ten-buttons,
+        .eleven-buttons, .twelve-buttons, .thirteen-buttons, .fourteen-buttons,
+        .fifteen-buttons, .sixteen-buttons, .seventeen-buttons, .eighteen-buttons,
+        .nineteen-buttons, .twenty-buttons, .twentyone-buttons, .twentytwo-buttons,
+        .twentythree-buttons, .twentyfour-buttons, .twentyfive-buttons,
+        .twentysix-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .one-buttons button, .two-buttons button, .three-buttons button, .four-buttons button,
+        .five-buttons button, .six-buttons button, .seven-buttons button, .eight-buttons button,
+        .nine-buttons button, .ten-buttons button, .eleven-buttons button, .twelve-buttons button,
+        .thirteen-buttons button, .fourteen-buttons button, .fifteen-buttons button,
+        .sixteen-buttons button, .seventeen-buttons button, .eighteen-buttons button,
+        .nineteen-buttons button, .twenty-buttons button, .twentyone-buttons button,
+        .twentytwo-buttons button, .twentythree-buttons button, .twentyfour-buttons button,
+        .twentyfive-buttons button, .twentysix-buttons button {
+            padding: 0.875rem 1.25rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            background-color: var(--light);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            transition: all 0.2s ease-in-out;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .one-buttons button:hover, .two-buttons button:hover, .three-buttons button:hover,
+        .four-buttons button:hover, .five-buttons button:hover, .six-buttons button:hover,
+        .seven-buttons button:hover, .eight-buttons button:hover, .nine-buttons button:hover,
+        .ten-buttons button:hover, .eleven-buttons button:hover, .twelve-buttons button:hover,
+        .thirteen-buttons button:hover, .fourteen-buttons button:hover, .fifteen-buttons button:hover,
+        .sixteen-buttons button:hover, .seventeen-buttons button:hover, .eighteen-buttons button:hover,
+        .nineteen-buttons button:hover, .twenty-buttons button:hover, .twentyone-buttons button:hover,
+        .twentytwo-buttons button:hover, .twentythree-buttons button:hover, .twentyfour-buttons button:hover,
+        .twentyfive-buttons button:hover, .twentysix-buttons button:hover {
+            border-color: var(--gray-400);
+            background-color: var(--gray-50);
+            color: var(--gray-700);
+        }
+
+        .active {
+            background-color: var(--secondary) !important;
+            color: white !important;
+            border-color: var(--secondary) !important;
+        }
+
+        .active:hover {
+            background-color: #4338ca !important;
+            border-color: #4338ca !important;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            margin-top: 2rem;
+        }
+
+        .submit-button:hover {
+            background-color: #047857;
+        }
+
+        .info-text {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: var(--blue-50);
+            border-radius: 8px;
+            border-left: 4px solid var(--blue-500);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+
+        .side-nav {
+            position: fixed;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 12px;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        .side-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.75rem;
+            padding: 0.75rem;
+            transition: all 0.2s ease-in-out;
+            border-radius: 8px;
+            width: 48px;
+            height: 48px;
+        }
+
+        .side-nav a:hover {
+            background-color: var(--gray-100);
+            color: var(--gray-800);
+        }
+
+        .side-nav a span {
+            font-size: 1.25rem;
+            margin-bottom: 0.125rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 1.875rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-header {
+                margin: 2.5rem 0 1rem;
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .one-buttons, .two-buttons, .three-buttons, .four-buttons, .five-buttons,
+            .six-buttons, .seven-buttons, .eight-buttons, .nine-buttons, .ten-buttons,
+            .eleven-buttons, .twelve-buttons, .thirteen-buttons, .fourteen-buttons,
+            .fifteen-buttons, .sixteen-buttons, .seventeen-buttons, .eighteen-buttons,
+            .nineteen-buttons, .twenty-buttons, .twentyone-buttons, .twentytwo-buttons,
+            .twentythree-buttons, .twentyfour-buttons, .twentyfive-buttons,
+            .twentysix-buttons {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .side-nav {
+                right: 0.5rem;
+                padding: 0.75rem;
+                border-radius: 8px;
+            }
+
+            .side-nav a {
+                width: 40px;
+                height: 40px;
+                font-size: 0.7rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 右側の追従ナビ -->
+    <div class="side-nav" id="sideNav">
+        <a href="#section-message">
+            <span>⇩</span>
+            <i class="fas fa-comment"></i>
+        </a>
+    </div>
+
+    <!--編集箇所（見た目部分）-->
+    <div class="container">
+        <h1>LiAm<br>アンケートフォーム</h1>
+        <div class="info-text">以下全て入力後【アンケート送信】ボタンを押してください。</div>
+        <div class="label"><span class="required">必須</span>お名前（フルネーム）を教えてください。</div>
+        <textarea id="message" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
+
+        <div class="label"><span class="required">必須</span>郵便番号を教えてください。</div>
+        <textarea id="message2" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
+
+        <div class="label"><span class="required">必須</span>都道府県を教えてください。</div>
+        <textarea id="message3" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
+
+        <div class="label"><span class="required">必須</span>市区町村を教えてください。</div>
+        <textarea id="message4" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
+
+        <div class="label"><span class="required">必須</span>番地・建物名を教えてください。</div>
+        <textarea id="message5" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
+
+        <div class="label"><span class="required">必須</span>ご性別を教えてください。</div>
+        <div class="one-buttons">
+            <button type="button" class="one" onclick="selectone(this)">10代</button>
+            <button type="button" class="one" onclick="selectone(this)">20代</button>
+            <button type="button" class="one" onclick="selectone(this)">30代</button>
+            <button type="button" class="one" onclick="selectone(this)">40代</button>
+            <button type="button" class="one" onclick="selectone(this)">50代以上</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>来店動機を教えてください。</div>
+        <div class="two-buttons">
+            <button type="button" class="two" onclick="selecttwo(this)">学生</button>
+            <button type="button" class="two" onclick="selecttwo(this)">会社員</button>
+            <button type="button" class="two" onclick="selecttwo(this)">主婦</button>
+            <button type="button" class="two" onclick="selecttwo(this)">自営業</button>
+            <button type="button" class="two" onclick="selecttwo(this)">その他</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>お電話番号（連絡のつきやすい番号）を教えてください。</div>
+        <textarea id="message6" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
+
+        <div class="section-header">肌質改善について</div>
+        <div class="label"><span class="required">必須</span>現在のお肌のお悩みはありますか？</div>
+        <div class="three-buttons">
+            <button type="button" class="three" onclick="selectthree(this)">ニキビ・ニキビ跡</button>
+            <button type="button" class="three" onclick="selectthree(this)">毛穴の開き・黒ずみ</button>
+            <button type="button" class="three" onclick="selectthree(this)">しみ・色素沈着</button>
+            <button type="button" class="three" onclick="selectthree(this)">乾燥・ごわつき</button>
+            <button type="button" class="three" onclick="selectthree(this)">しわ・たるみ</button>
+            <button type="button" class="three" onclick="selectthree(this)">敏感肌・赤み</button>
+            <button type="button" class="three" onclick="selectthree(this)">その他</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>目指したいお肌は？</div>
+        <div class="four-buttons">
+            <button type="button" class="four" onclick="selectfour(this)">ツヤ肌</button>
+            <button type="button" class="four" onclick="selectfour(this)">透明感</button>
+            <button type="button" class="four" onclick="selectfour(this)">毛穴レス</button>
+            <button type="button" class="four" onclick="selectfour(this)">トーンアップ</button>
+            <button type="button" class="four" onclick="selectfour(this)">ハリ弾力</button>
+        </div>
+
+        <div class="section-header">小顔ケアについて</div>
+        <div class="label"><span class="required">必須</span>気になる部分は？</div>
+        <div class="five-buttons">
+            <button type="button" class="five" onclick="selectfive(this)">フェイスラインのもたつき</button>
+            <button type="button" class="five" onclick="selectfive(this)">二重あご</button>
+            <button type="button" class="five" onclick="selectfive(this)">むくみ</button>
+            <button type="button" class="five" onclick="selectfive(this)">エラの張り</button>
+            <button type="button" class="five" onclick="selectfive(this)">ほうれい線・たるみ</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>理想のフェイスラインは？</div>
+        <div class="six-buttons">
+            <button type="button" class="six" onclick="selectsix(this)">シャープな輪郭</button>
+            <button type="button" class="six" onclick="selectsix(this)">スッキリ小顔</button>
+            <button type="button" class="six" onclick="selectsix(this)">自然なリフトアップ感</button>
+        </div>
+
+        <div class="section-header">脂肪分解（レモンボトル）について</div>
+        <div class="label"><span class="required">必須</span>気になる部位は？</div>
+        <div class="seven-buttons">
+            <button type="button" class="seven" onclick="selectseven(this)">顔（フェイスライン／二重あご）</button>
+            <button type="button" class="seven" onclick="selectseven(this)">二の腕</button>
+            <button type="button" class="seven" onclick="selectseven(this)">お腹まわり</button>
+            <button type="button" class="seven" onclick="selectseven(this)">太もも</button>
+            <button type="button" class="seven" onclick="selectseven(this)">ふくらはぎ</button>
+            <button type="button" class="seven" onclick="selectseven(this)">その他</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>脂肪溶解や痩身エステ経験は？</div>
+        <div class="eight-buttons">
+            <button type="button" class="eight" onclick="selecteight(this)">はい</button>
+            <button type="button" class="eight" onclick="selecteight(this)">いいえ</button>
+        </div>
+
+        <div class="section-header">痩身・ブライダルについて</div>
+        <div class="label"><span class="required">必須</span>特に気になる部位は？</div>
+        <div class="nine-buttons">
+            <button type="button" class="nine" onclick="selectnine(this)">お腹</button>
+            <button type="button" class="nine" onclick="selectnine(this)">太もも</button>
+            <button type="button" class="nine" onclick="selectnine(this)">ヒップ</button>
+            <button type="button" class="nine" onclick="selectnine(this)">二の腕</button>
+            <button type="button" class="nine" onclick="selectnine(this)">背中</button>
+            <button type="button" class="nine" onclick="selectnine(this)">デコルテ</button>
+            <button type="button" class="nine" onclick="selectnine(this)">その他</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>希望する変化は？</div>
+        <div class="ten-buttons">
+            <button type="button" class="ten" onclick="selectten(this)">サイズダウン</button>
+            <button type="button" class="ten" onclick="selectten(this)">部分引き締め</button>
+            <button type="button" class="ten" onclick="selectten(this)">全体スリム</button>
+            <button type="button" class="ten" onclick="selectten(this)">姿勢改善（猫背・巻き肩）</button>
+            <button type="button" class="ten" onclick="selectten(this)">むくみ・冷え改善</button>
+            <button type="button" class="ten" onclick="selectten(this)">ウェディングドレスが映える体型</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>ご利用目的は？</div>
+        <div class="eleven-buttons">
+            <button type="button" class="eleven" onclick="selecteleven(this)">日常的なボディケア・痩身</button>
+            <button type="button" class="eleven" onclick="selecteleven(this)">ブライダルエステ（結婚式に向けて）</button>
+        </div>
+
+        <div class="label">結婚式予定（ブライダル希望の方のみ）</div>
+        <div class="twelve-buttons">
+            <button type="button" class="twelve" onclick="selecttwelve(this)">半年以内</button>
+            <button type="button" class="twelve" onclick="selecttwelve(this)">3ヶ月以内</button>
+            <button type="button" class="twelve" onclick="selecttwelve(this)">1ヶ月以内</button>
+            <button type="button" class="twelve" onclick="selecttwelve(this)">未定</button>
+        </div>
+
+        <div class="section-header">脱毛について</div>
+        <div class="label"><span class="required">必須</span>希望部位は？</div>
+        <div class="thirteen-buttons">
+            <button type="button" class="thirteen" onclick="selectthirteen(this)">顔</button>
+            <button type="button" class="thirteen" onclick="selectthirteen(this)">ワキ</button>
+            <button type="button" class="thirteen" onclick="selectthirteen(this)">VIO</button>
+            <button type="button" class="thirteen" onclick="selectthirteen(this)">背中うなじ（うなじワックスあり）</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>脱毛経験は？</div>
+        <div class="fourteen-buttons">
+            <button type="button" class="fourteen" onclick="selectfourteen(this)">はい</button>
+            <button type="button" class="fourteen" onclick="selectfourteen(this)">いいえ</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>気になることは？</div>
+        <div class="fifteen-buttons">
+            <button type="button" class="fifteen" onclick="selectfifteen(this)">顔</button>
+            <button type="button" class="fifteen" onclick="selectfifteen(this)">ワキ</button>
+            <button type="button" class="fifteen" onclick="selectfifteen(this)">VIO</button>
+            <button type="button" class="fifteen" onclick="selectfifteen(this)">背中うなじ（うなじワックスあり）</button>
+        </div>
+
+        <div class="section-header">フェイスワックスについて</div>
+        <div class="label"><span class="required">必須</span>ご興味はありますか？</div>
+        <div class="sixteen-buttons">
+            <button type="button" class="sixteen" onclick="selectsixteen(this)">はい</button>
+            <button type="button" class="sixteen" onclick="selectsixteen(this)">いいえ</button>
+            <button type="button" class="sixteen" onclick="selectsixteen(this)">試してみたい</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>気になる点は？</div>
+        <div class="seventeen-buttons">
+            <button type="button" class="seventeen" onclick="selectseventeen(this)">痛み</button>
+            <button type="button" class="seventeen" onclick="selectseventeen(this)">効果（産毛除去・くすみ改善）</button>
+            <button type="button" class="seventeen" onclick="selectseventeen(this)">ダウンタイム</button>
+        </div>
+
+        <div class="section-header">生活習慣について</div>
+        <div class="label"><span class="required">必須</span>1日の水分摂取量は？</div>
+        <div class="eighteen-buttons">
+            <button type="button" class="eighteen" onclick="selecteighteen(this)">500ml以下</button>
+            <button type="button" class="eighteen" onclick="selecteighteen(this)">1L程度</button>
+            <button type="button" class="eighteen" onclick="selecteighteen(this)">2L以上</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>気になる点は？</div>
+        <div class="nineteen-buttons">
+            <button type="button" class="nineteen" onclick="selectnineteen(this)">バランスよく意識している</button>
+            <button type="button" class="nineteen" onclick="selectnineteen(this)">外食・コンビニが多い</button>
+            <button type="button" class="nineteen" onclick="selectnineteen(this)">甘いものや油っこいものが多い</button>
+        </div>
+        <div class="label"><span class="required">必須</span>睡眠時間は？</div>
+        <div class="twenty-buttons">
+            <button type="button" class="twenty" onclick="selecttwenty(this)">5時間未満</button>
+            <button type="button" class="twenty" onclick="selecttwenty(this)">5〜7時間</button>
+            <button type="button" class="twenty" onclick="selecttwenty(this)">7時間以上</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>お酒は？</div>
+        <div class="twentyone-buttons">
+            <button type="button" class="twentyone" onclick="selecttwentyone(this)">飲まない</button>
+            <button type="button" class="twentyone" onclick="selecttwentyone(this)">週1〜2回</button>
+            <button type="button" class="twentyone" onclick="selecttwentyone(this)">ほぼ毎日</button>
+        </div>
+        <div class="label"><span class="required">必須</span>薬の服用は？</div>
+        <div class="twentytwo-buttons">
+            <button type="button" class="twentytwo" onclick="selecttwentytwo(this)">なし</button>
+            <button type="button" class="twentytwo" onclick="selecttwentytwo(this)">あり（※可能であれば内容をご記入ください）</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>ホームケア（スキンケア・ボディケア）は？</div>
+        <div class="twentythree-buttons">
+            <button type="button" class="twentythree" onclick="selecttwentythree(this)">毎日している</button>
+            <button type="button" class="twentythree" onclick="selecttwentythree(this)">時々している</button>
+            <button type="button" class="twentythree" onclick="selecttwentythree(this)">あまりしていない</button>
+        </div>
+
+        <div class="section-header">ご来店について</div>
+        <div class="label"><span class="required">必須</span>ご希望の施術時期は？</div>
+        <div class="twentyfour-buttons">
+            <button type="button" class="twentyfour" onclick="selecttwentyfour(this)">できるだけ早く</button>
+            <button type="button" class="twentyfour" onclick="selecttwentyfour(this)">1〜2ヶ月以内</button>
+            <button type="button" class="twentyfour" onclick="selecttwentyfour(this)">検討中</button>
+        </div>
+
+        <div class="label"><span class="required">必須</span>ご予算感は？</div>
+        <div class="twentyfive-buttons">
+            <button type="button" class="twentyfive" onclick="selecttwentyfive(this)">〜1万円</button>
+            <button type="button" class="twentyfive" onclick="selecttwentyfive(this)">1〜3万円</button>
+            <button type="button" class="twentyfive" onclick="selecttwentyfive(this)">3〜5万円</button>
+            <button type="button" class="twentyfive" onclick="selecttwentyfive(this)">5万円以上</button>
+            <button type="button" class="twentyfive" onclick="selecttwentyfive(this)">特に決めていない</button>
+        </div>
+
+        <div class="label">💠 施術に関する同意書とお願い 💠</div>
+        <div class="info-text">LiAm心斎橋店では、肌質改善（ピーリング・導入等）、小顔フェイシャル、脂肪分解剤（レモンボトル等）、ブライダルエステ、脱毛、フェイスワックス、美容機器を使用した施術を安心して受けていただくため、下記内容をご理解の上、ご同意いただいて施術を行います。<br><br>⸻<br><br>⚠️ 施術についてのご注意
+ 1. 当サロンの施術は 医療行為ではなく、美容目的 です。<br> 2. 効果や実感には 個人差 があります。<br> 3. 施術により、赤み・ひりつき・乾燥・皮むけ・かゆみ・筋肉痛・一時的な腫れ等が出る場合があります。通常は1週間以内に治まりますが、体質により長引くこともあります。<br> 4. 妊娠中・授乳中・重い皮膚疾患・感染症をお持ちの方は施術を控えさせていただきます。<br> 5. 施術前後24時間は、日焼け・激しい運動・飲酒をお控えください。体調不良時は必ずご連絡ください。
+ 6. 脂肪分解剤は体質により腫れ・むくみが出やすい場合がありますが、数日〜1週間程度で落ち着きます。<br> 7. 脱毛・フェイスワックス施術後は一時的に赤みや毛穴のポツポツが出る場合があります。<br><br>⸻<br><br>💍 ブライダルエステに関する特別注意事項<br> • 初めての施術は 挙式や前撮りの1ヶ月以上前まで に行うことを推奨します。<br> • 挙式2週間以内のピーリング・脂肪分解剤・フェイスワックスは、赤みや腫れが残る可能性があるため控えていただくことをおすすめします。<br> • 背中・デコルテ・フェイスワックス はドレス着用時に見える部位のため、特に注意が必要です。<br> • 挙式直前に施術をご希望の場合は、リスクをご理解いただいたうえでのご判断をお願いいたします。
+        </div>
+
+        <div class="twentysix-buttons">
+            <button type="button" class="twentysix" onclick="selecttwentysix(this)">同意する</button>
+            <button type="button" class="twentysix" onclick="selecttwentysix(this)">同意しない</button>
+        </div>
+
+        <button class="submit-button" onclick="submitForm()" div id="section-message">送信</button>
+    </div>
+    <!-------------------------------------------------->
+
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script> <!-- LIFF SDKの読み込み -->
+    <script>
+        let oneCount = '';
+        let twoCount = '';
+        let threeCount = '';
+        let fourCount = '';
+        let fiveCount = '';
+        let sixCount = '';
+        let sevenCount = '';
+        let eightCount = '';
+        let nineCount = '';
+        let tenCount = '';
+        let elevenCount = '';
+        let twelveCount = '';
+        let thirteenCount = '';
+        let fourteenCount = '';
+        let fifteenCount = '';
+        let sixteenCount = '';
+        let seventeenCount = '';
+        let eighteenCount = '';
+        let nineteenCount = '';
+        let twentyCount = '';
+        let twentyoneCount = '';
+        let twentytwoCount = '';
+        let twentythreeCount = '';
+        let twentyfourCount = '';
+        let twentyfiveCount = '';
+        let twentysixCount = '';
+
+        // LIFF初期化
+        document.addEventListener('DOMContentLoaded', function () {
+            liff.init({
+                liffId: '2005254357-zKma9BZk' // ここにあなたのLIFF IDを入力*********************忘れない！！！！******************************
+            }).then(() => {
+                // LIFF初期化成功時の処理
+                console.log('LIFF初期化成功');
+            }).catch((err) => {
+                // LIFF初期化失敗時の処理
+                console.error('LIFF初期化失敗', err);
+            });
+        });
+
+        // プレースホルダーを非表示にする関数
+        function hidePlaceholder(placeholderId) {
+            document.getElementById(placeholderId).style.display = 'none';
+        }
+
+        // プレースホルダーを表示する関数（入力がない場合）
+        function showPlaceholder(inputId, placeholderId) {
+            const input = document.getElementById(inputId);
+            if (!input.value) {
+                document.getElementById(placeholderId).style.display = 'inline';
+            }
+        }
+
+        function selectone(element) {
+            // 単一選択項目の処理コード
+            const buttons = document.querySelectorAll('.one-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // 選択されたボタンだけにactiveクラスを追加
+            element.classList.add('active');
+            oneCount = element.innerText;
+        }
+
+        function selecttwo(element) {
+            // 単一選択項目の処理コード
+            const buttons = document.querySelectorAll('.two-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // 選択されたボタンだけにactiveクラスを追加
+            element.classList.add('active');
+            twoCount = element.innerText;
+        }
+
+        function selectthree(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.three-buttons button.active');
+            const selectedthrees = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            threeCount = selectedthrees;  // 配列として保持
+        }
+
+        function selectfour(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.four-buttons button.active');
+            const selectedfours = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            fourCount = selectedfours;  // 配列として保持
+        }
+
+        function selectfive(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.five-buttons button.active');
+            const selectedfives = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            fiveCount = selectedfives;  // 配列として保持
+        }
+
+        function selectsix(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.six-buttons button.active');
+            const selectedsixs = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            sixCount = selectedsixs;  // 配列として保持
+        }
+
+        function selectseven(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.seven-buttons button.active');
+            const selectedsevens = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            sevenCount = selectedsevens;  // 配列として保持
+        }
+
+        function selecteight(element) {
+            // 単一選択項目の処理コード
+            const buttons = document.querySelectorAll('.eight-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // 選択されたボタンだけにactiveクラスを追加
+            element.classList.add('active');
+            eightCount = element.innerText;
+        }
+
+        function selectnine(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.nine-buttons button.active');
+            const selectednines = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            nineCount = selectednines;  // 配列として保持
+        }
+
+        function selectten(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.ten-buttons button.active');
+            const selectedtens = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            tenCount = selectedtens;  // 配列として保持
+        }
+
+        function selecteleven(element) {
+            // 単一選択項目の処理コード
+            const buttons = document.querySelectorAll('.eleven-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // 選択されたボタンだけにactiveクラスを追加
+            element.classList.add('active');
+            elevenCount = element.innerText;
+        }
+
+        function selecttwelve(element) {
+            // 単一選択項目の処理コード
+            const buttons = document.querySelectorAll('.twelve-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // 選択されたボタンだけにactiveクラスを追加
+            element.classList.add('active');
+            twelveCount = element.innerText;
+        }
+
+        function selectthirteen(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.thirteen-buttons button.active');
+            const selectedthirteens = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            thirteenCount = selectedthirteens;  // 配列として保持
+        }
+
+        function selectfourteen(element) {
+            // 単一選択項目の処理コード
+            const buttons = document.querySelectorAll('.fourteen-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // 選択されたボタンだけにactiveクラスを追加
+            element.classList.add('active');
+            fourteenCount = element.innerText;
+        }
+
+        function selectfifteen(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.fifteen-buttons button.active');
+            const selectedfifteens = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            fifteenCount = selectedfifteens;  // 配列として保持
+        }
+
+        function selectsixteen(element) {
+            const buttons = document.querySelectorAll('.sixteen-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            sixteenCount = element.innerText;
+        }
+
+        function selectseventeen(element) {
+            // すでに active クラスが付いていれば外し、付いていなければ追加する（トグル）
+            element.classList.toggle('active');
+
+            // 選択されているすべてのボタンのテキストを取得して配列にする
+            const activeButtons = document.querySelectorAll('.seventeen-buttons button.active');
+            const selectedseventeens = Array.from(activeButtons).map(button => button.innerText);
+
+            // 必要に応じて選択された内容を格納
+            seventeenCount = selectedseventeens;  // 配列として保持
+        }
+
+        // selecteighteen関数
+        function selecteighteen(element) {
+            const buttons = document.querySelectorAll('.eighteen-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            eighteenCount = element.innerText;
+        }
+
+        // selectnineteen関数
+        function selectnineteen(element) {
+            const buttons = document.querySelectorAll('.nineteen-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            nineteenCount = element.innerText;
+        }
+
+        // selecttwenty関数
+        function selecttwenty(element) {
+            const buttons = document.querySelectorAll('.twenty-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            twentyCount = element.innerText;
+        }
+
+        // selecttwentyone関数
+        function selecttwentyone(element) {
+            const buttons = document.querySelectorAll('.twentyone-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            twentyoneCount = element.innerText;
+        }
+
+        // selecttwentytwo関数
+        function selecttwentytwo(element) {
+            const buttons = document.querySelectorAll('.twentytwo-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            twentytwoCount = element.innerText;
+        }
+
+        // selecttwentythree関数
+        function selecttwentythree(element) {
+            const buttons = document.querySelectorAll('.twentythree-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            twentythreeCount = element.innerText;
+        }
+
+        // selecttwentyfour関数
+        function selecttwentyfour(element) {
+            const buttons = document.querySelectorAll('.twentyfour-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            twentyfourCount = element.innerText;
+        }
+
+        // selecttwentyfive関数
+        function selecttwentyfive(element) {
+            const buttons = document.querySelectorAll('.twentyfive-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            twentyfiveCount = element.innerText;
+        }
+
+        // selecttwentyfive関数
+        function selecttwentysix(element) {
+            const buttons = document.querySelectorAll('.twentysix-buttons button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            twentysixCount = element.innerText;
+        }
+
+        //見た目変更した際に不要な物は消す！
+        function submitForm() {
+            const message = document.getElementById('message').value;
+            const message2 = document.getElementById('message2').value;
+            const message3 = document.getElementById('message3').value;
+            const message4 = document.getElementById('message4').value;
+            const message5 = document.getElementById('message5').value;
+            const message7 = document.getElementById('message6').value;
+            oneCount: oneCount;
+            twoCount: twoCount;
+            threeCount: threeCount;
+            fourCount: fourCount;
+            fiveCount: fiveCount;
+            sixCount: sixCount;
+            sevenCount: sevenCount;
+            eightCount: eightCount;
+            nineCount: nineCount;
+            tenCount: tenCount;
+            elevenCount: elevenCount;
+            twelveCount: twelveCount;
+            thirteenCount: thirteenCount;
+            fourteenCount: fourteenCount;
+            fifteenCount: fifteenCount;
+            sixteenCount: sixteenCount;
+            seventeenCount: seventeenCount;
+            eighteenCount: eighteenCount;
+            nineteenCount: nineteenCount;
+            twentyCount: twentyCount;
+            twentyoneCount: twentyoneCount;
+            twentytwoCount: twentytwoCount;
+            twentythreeCount: twentythreeCount;
+            twentyfourCount: twentyfourCount;
+            twentyfiveCount: twentyfiveCount;
+            twentysixCount: twentysixCount;
+
+            const formData = {
+                message,
+                message2,
+                message3,
+                message4,
+                message5,
+                message6,
+                oneCount,
+                twoCount,
+                threeCount,
+                fourCount,
+                fiveCount,
+                sixCount,
+                sevenCount,
+                eightCount,
+                nineCount,
+                tenCount,
+                elevenCount,
+                twelveCount,
+                thirteenCount,
+                fourteenCount,
+                fifteenCount,
+                sixteenCount,
+                seventeenCount,
+                eighteenCount,
+                nineteenCount,
+                twentyCount,
+                twentyoneCount,
+                twentytwoCount,
+                twentythreeCount,
+                twentyfourCount,
+                twentyfiveCount,
+                twentysixCount,
+            };
+
+            // フォームデータのチェック
+            if (!formData.message) {
+                alert('お名前を入力してください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.message2) {
+                alert('郵便番号を入力してください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.message3) {
+                alert('都道府県を入力してください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.message4) {
+                alert('市区町村を入力してください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.message5) {
+                alert('番地・建物名を入力してください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.oneCount) {
+                alert('年齢をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.twoCount) {
+                alert('職業をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.message6) {
+                alert('お電話番号を入力してください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.threeCount) {
+                alert('現在のお肌のお悩みをご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.fourCount) {
+                alert('目指したいお肌をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.fiveCount) {
+                alert('小顔ケアについて気になる部分をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.sixCount) {
+                alert('理想のフェイスラインをご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.sevenCount) {
+                alert('脂肪分解について気になる部位をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.eightCount) {
+                alert('脂肪溶解や痩身エステ経験をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.nineCount) {
+                alert('痩身・ブライダルについて気になる部位をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.tenCount) {
+                alert('希望する変化をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.elevenCount) {
+                alert('痩身・ブライダルについてご利用目的をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.thirteenCount) {
+                alert('脱毛について、希望部位をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.fourteenCount) {
+                alert('脱毛経験をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.fifteenCount) {
+                alert('脱毛について、気になることをご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.sixteenCount) {
+                alert('フェイスワックスについて、ご興味はありますか？ご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.seventeenCount) {
+                alert('フェイスワックスについて、気になる点をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.eighteenCount) {
+                alert('1日の水分摂取量をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.nineteenCount) {
+                alert('食生活についてご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.twentyCount) {
+                alert('睡眠時間をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.twentyoneCount) {
+                alert('飲酒頻度をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.twentytwoCount) {
+                alert('薬の服用についてご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.twentythreeCount) {
+                alert('ホームケア（スキンケア・ボディケア）についてご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.twentyfourCount) {
+                alert('ご希望の施術時期についてご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.twentyfiveCount) {
+                alert('ご予算をご選択ください。');
+                return;
+            }
+
+            // フォームデータのチェック
+            if (!formData.twentysixCount) {
+                alert('施術に関する同意書をご選択ください。');
+                return;
+            }
+
+            // LINEトークにメッセージを送信
+            liff.sendMessages([{
+                type: 'text',
+                text: `≪アンケート≫
+                【お名前】
+                ・${formData.message}
+
+                【郵便番号】
+                ・${formData.message2}
+
+                【都道府県】
+                ・${formData.message3}
+
+                【市区町村】
+                ・${formData.message4}
+
+                【番地・建物名】
+                ・${formData.message5}
+
+                【年齢】
+                ・${formData.oneCount}
+
+                【職業】
+                ・${formData.twoCount}
+
+                【お電話番号】
+                ・${formData.message6}
+                
+                【現在のお肌のお悩み】
+                ・${formData.threeCount}
+
+                【目指したいお肌】
+                ・${formData.fourCount}
+
+                【小顔ケアについて気になる部分】
+                ・${formData.fiveCount}
+
+                【理想のフェイスライン】
+                ・${formData.sixCount}
+
+                【脂肪分解について気になる部位】
+                ・${formData.sevenCount}
+
+                【脂肪溶解や痩身エステ経験】
+                ・${formData.eightCount}
+
+                【痩身・ブライダルについて気になる部位】
+                ・${formData.nineCount}
+
+                【希望する変化】
+                ・${formData.tenCount}
+
+                【痩身・ブライダルについてご利用目的】
+                ・${formData.elevenCount}
+
+                【十二番目の項目】
+                ・${formData.twelveCount}
+
+                【脱毛について、希望部位】
+                ・${formData.thirteenCount}
+
+                【脱毛経験】
+                ・${formData.fourteenCount}
+
+                【脱毛について、気になること】
+                ・${formData.fifteenCount}
+
+                【フェイスワックスについて、ご興味】
+                ・${formData.sixteenCount}
+
+                【フェイスワックスについて、気になる点】
+                ・${formData.seventeenCount}
+
+                【1日の水分摂取量】
+                ・${formData.eighteenCount}
+
+                【食生活について】
+                ・${formData.nineteenCount}
+
+                【睡眠時間】
+                ・${formData.twentyCount}
+
+                【飲酒頻度】
+                ・${formData.twentyoneCount}
+
+                【薬の服用について】
+                ・${formData.twentytwoCount}
+
+                【ホームケア（スキンケア・ボディケア）について】
+                ・${formData.twentythreeCount}
+
+                【ご希望の施術時期について】
+                ・${formData.twentyfourCount}
+
+                【ご予算】
+                ・${formData.twentyfiveCount}
+
+                【同意書の同意】
+                ・${formData.twentysixCount}`
+                
+            }]).then(() => {
+                /* メッセージ送信成功時の処理 */
+                alert('ご記入ありがとうございます。');
+                /* LIFFウィンドウを閉じる */
+                liff.closeWindow();
+            }).catch((err) => {
+                /* メッセージ送信失敗時の処理 */
+                console.error('メッセージの送信に失敗しました', err);
+            });
+        }
+
+    </script>
+</body>
+
+</html>
