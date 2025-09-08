@@ -1218,105 +1218,42 @@
 
             // LINEトークにメッセージを送信
             liff.sendMessages([{
-                type: 'text',
-                text: `≪アンケート≫
-                【お名前】
-                ・${formData.message}
-
-                【郵便番号】
-                ・${formData.message2}
-
-                【都道府県】
-                ・${formData.message3}
-
-                【市区町村】
-                ・${formData.message4}
-
-                【番地・建物名】
-                ・${formData.message5}
-
-                【年齢】
-                ・${formData.oneCount}
-
-                【職業】
-                ・${formData.twoCount}
-
-                【お電話番号】
-                ・${formData.message6}
-                
-                【現在のお肌のお悩み】
-                ・${formData.threeCount}
-
-                【目指したいお肌】
-                ・${formData.fourCount}
-
-                【小顔ケアについて気になる部分】
-                ・${formData.fiveCount}
-
-                【理想のフェイスライン】
-                ・${formData.sixCount}
-
-                【脂肪分解について気になる部位】
-                ・${formData.sevenCount}
-
-                【脂肪溶解や痩身エステ経験】
-                ・${formData.eightCount}
-
-                【痩身・ブライダルについて気になる部位】
-                ・${formData.nineCount}
-
-                【希望する変化】
-                ・${formData.tenCount}
-
-                【痩身・ブライダルについてご利用目的】
-                ・${formData.elevenCount}
-
-                【十二番目の項目】
-                ・${formData.twelveCount}
-
-                【脱毛について、希望部位】
-                ・${formData.thirteenCount}
-
-                【脱毛経験】
-                ・${formData.fourteenCount}
-
-                【脱毛について、気になること】
-                ・${formData.fifteenCount}
-
-                【フェイスワックスについて、ご興味】
-                ・${formData.sixteenCount}
-
-                【フェイスワックスについて、気になる点】
-                ・${formData.seventeenCount}
-
-                【1日の水分摂取量】
-                ・${formData.eighteenCount}
-
-                【食生活について】
-                ・${formData.nineteenCount}
-
-                【睡眠時間】
-                ・${formData.twentyCount}
-
-                【飲酒頻度】
-                ・${formData.twentyoneCount}
-
-                【薬の服用について】
-                ・${formData.twentytwoCount}
-
-                【ホームケア（スキンケア・ボディケア）について】
-                ・${formData.twentythreeCount}
-
-                【ご希望の施術時期について】
-                ・${formData.twentyfourCount}
-
-                【ご予算】
-                ・${formData.twentyfiveCount}
-
-                【同意書の同意】
-                ・${formData.twentysixCount}`
-                
-            }]).then(() => {
+  type: 'text',
+  text: 
+    '≪アンケート≫\n' +
+    '【お名前】\n・' + formData.message + '\n' +
+    '【郵便番号】\n・' + formData.message2 + '\n' +
+    '【都道府県】\n・' + formData.message3 + '\n' +
+    '【市区町村】\n・' + formData.message4 + '\n' +
+    '【番地・建物名】\n・' + formData.message5 + '\n' +
+    '【年齢】\n・' + formData.oneCount + '\n' +
+    '【職業】\n・' + formData.twoCount + '\n' +
+    '【お電話番号】\n・' + formData.message6 + '\n' +
+    '【現在のお肌のお悩み】\n・' + formData.threeCount + '\n' +
+    '【目指したいお肌】\n・' + formData.fourCount + '\n' +
+    '【小顔ケアについて気になる部分】\n・' + formData.fiveCount + '\n' +
+    '【理想のフェイスライン】\n・' + formData.sixCount + '\n' +
+    '【脂肪分解について気になる部位】\n・' + formData.sevenCount + '\n' +
+    '【脂肪溶解や痩身エステ経験】\n・' + formData.eightCount + '\n' +
+    '【痩身・ブライダルについて気になる部位】\n・' + formData.nineCount + '\n' +
+    '【希望する変化】\n・' + formData.tenCount + '\n' +
+    '【痩身・ブライダルについてご利用目的】\n・' + formData.elevenCount + '\n' +
+    '【十二番目の項目】\n・' + formData.twelveCount + '\n' +
+    '【脱毛について、希望部位】\n・' + formData.thirteenCount + '\n' +
+    '【脱毛経験】\n・' + formData.fourteenCount + '\n' +
+    '【脱毛について、気になること】\n・' + formData.fifteenCount + '\n' +
+    '【フェイスワックスについて、ご興味】\n・' + formData.sixteenCount + '\n' +
+    '【フェイスワックスについて、気になる点】\n・' + formData.seventeenCount + '\n' +
+    '【1日の水分摂取量】\n・' + formData.eighteenCount + '\n' +
+    '【食生活について】\n・' + formData.nineteenCount + '\n' +
+    '【睡眠時間】\n・' + formData.twentyCount + '\n' +
+    '【飲酒頻度】\n・' + formData.twentyoneCount + '\n' +
+    '【薬の服用について】\n・' + formData.twentytwoCount + '\n' +
+    '【ホームケア（スキンケア・ボディケア）について】\n・' + formData.twentythreeCount + '\n' +
+    '【ご希望の施術時期について】\n・' + formData.twentyfourCount + '\n' +
+    '【ご予算】\n・' + formData.twentyfiveCount + '\n' +
+    '【同意書の同意】\n・' + formData.twentysixCount
+}]).then(() => {
                 /* メッセージ送信成功時の処理 */
                 alert('ご記入ありがとうございます。');
                 /* LIFFウィンドウを閉じる */
