@@ -411,17 +411,8 @@
         <div class="label"><span class="required">必須</span>お名前（フルネーム）を教えてください。</div>
         <textarea id="message" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
 
-        <div class="label"><span class="required">必須</span>郵便番号を教えてください。</div>
-        <textarea id="message2" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
-
-        <div class="label"><span class="required">必須</span>都道府県を教えてください。</div>
+        <div class="label"><span class="required">必須</span>ご住所を教えてください。</div>
         <textarea id="message3" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
-
-        <div class="label"><span class="required">必須</span>市区町村を教えてください。</div>
-        <textarea id="message4" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
-
-        <div class="label"><span class="required">必須</span>番地・建物名を教えてください。</div>
-        <textarea id="message5" rows="1" placeholder="入力してください"></textarea> <!-- メッセージ入力フィールド -->
 
         <div class="label"><span class="required">必須</span>ご年代を教えてください。</div>
         <div class="one-buttons">
@@ -974,10 +965,7 @@
         //見た目変更した際に不要な物は消す！
         function submitForm() {
             const message = document.getElementById('message').value;
-            const message2 = document.getElementById('message2').value;
             const message3 = document.getElementById('message3').value;
-            const message4 = document.getElementById('message4').value;
-            const message5 = document.getElementById('message5').value;
             const message6 = document.getElementById('message6').value;
             oneCount: oneCount;
             twoCount: twoCount;
@@ -1008,10 +996,7 @@
 
             const formData = {
                 message,
-                message2,
                 message3,
-                message4,
-                message5,
                 message6,
                 oneCount,
                 twoCount,
@@ -1048,26 +1033,8 @@
             }
 
             // フォームデータのチェック
-            if (!formData.message2) {
-                alert('郵便番号を入力してください。');
-                return;
-            }
-
-            // フォームデータのチェック
             if (!formData.message3) {
-                alert('都道府県を入力してください。');
-                return;
-            }
-
-            // フォームデータのチェック
-            if (!formData.message4) {
-                alert('市区町村を入力してください。');
-                return;
-            }
-
-            // フォームデータのチェック
-            if (!formData.message5) {
-                alert('番地・建物名を入力してください。');
+                alert('ご住所を入力してください。');
                 return;
             }
 
@@ -1233,34 +1200,31 @@
   text: 
     '≪アンケート≫\n' +
     '【お名前】\n・' + formData.message + '\n' +
-    '【郵便番号】\n・' + formData.message2 + '\n' +
-    '【都道府県】\n・' + formData.message3 + '\n' +
-    '【市区町村】\n・' + formData.message4 + '\n' +
-    '【番地・建物名】\n・' + formData.message5 + '\n' +
     '【年齢】\n・' + formData.oneCount + '\n' +
-    '【職業】\n・' + formData.twoCount + '\n' +
     '【お電話番号】\n・' + formData.message6 + '\n' +
+    '【職業】\n・' + formData.twoCount + '\n' +
+    '【ご住所】\n・' + formData.message3 + '\n\n\n' +
     '【現在のお肌のお悩み】\n・' + formData.threeCount + '\n' +
-    '【目指したいお肌】\n・' + formData.fourCount + '\n' +
+    '【目指したいお肌】\n・' + formData.fourCount + '\n\n\n' +
     '【小顔ケアについて気になる部分】\n・' + formData.fiveCount + '\n' +
-    '【理想のフェイスライン】\n・' + formData.sixCount + '\n' +
+    '【理想のフェイスライン】\n・' + formData.sixCount + '\n\n\n' +
     '【脂肪分解について気になる部位】\n・' + formData.sevenCount + '\n' +
-    '【脂肪溶解や痩身エステ経験】\n・' + formData.eightCount + '\n' +
+    '【脂肪溶解や痩身エステ経験】\n・' + formData.eightCount + '\n\n\n' +
     '【痩身・ブライダルについて気になる部位】\n・' + formData.nineCount + '\n' +
     '【希望する変化】\n・' + formData.tenCount + '\n' +
     '【痩身・ブライダルについてご利用目的】\n・' + formData.elevenCount + '\n' +
-    '【結婚式の予定】\n・' + formData.twelveCount + '\n' +
+    '【結婚式の予定】\n・' + formData.twelveCount + '\n\n\n' +
     '【脱毛について、希望部位】\n・' + formData.thirteenCount + '\n' +
     '【脱毛経験】\n・' + formData.fourteenCount + '\n' +
-    '【脱毛について、気になること】\n・' + formData.fifteenCount + '\n' +
+    '【脱毛について、気になること】\n・' + formData.fifteenCount + '\n\n\n' +
     '【フェイスワックスについて、ご興味】\n・' + formData.sixteenCount + '\n' +
-    '【フェイスワックスについて、気になる点】\n・' + formData.seventeenCount + '\n' +
+    '【フェイスワックスについて、気になる点】\n・' + formData.seventeenCount + '\n\n\n' +
     '【1日の水分摂取量】\n・' + formData.eighteenCount + '\n' +
     '【食生活について】\n・' + formData.nineteenCount + '\n' +
     '【睡眠時間】\n・' + formData.twentyCount + '\n' +
     '【飲酒頻度】\n・' + formData.twentyoneCount + '\n' +
     '【薬の服用について】\n・' + formData.twentytwoCount + '\n' +
-    '【ホームケア（スキンケア・ボディケア）について】\n・' + formData.twentythreeCount + '\n' +
+    '【ホームケア（スキンケア・ボディケア）について】\n・' + formData.twentythreeCount + '\n\n\n' +
     '【ご希望の施術時期について】\n・' + formData.twentyfourCount + '\n' +
     '【ご予算】\n・' + formData.twentyfiveCount + '\n' +
     '【同意書の同意】\n・' + formData.twentysixCount
